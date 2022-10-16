@@ -64,7 +64,6 @@ def bruteforce(liste):
 
     #La premiere boucle est effectuée (2 puissance nombre elements dans la liste
     # si 20 éléments dans la liste, s puissance 20 = 1 048 576 fois
-
     while index < length:
         #print(index)
         index_bin = (format(index, 'b'))
@@ -99,6 +98,7 @@ def bruteforce(liste):
         index_str_index_bin = 0
         cout = 0
         benef = 0.0
+
         while (index_str_index_bin < long_str_index_bin):
             # il faudra appeler ici, le calcul du cout et des benefices
             # print (str_index_bin[index_str_index_bin])
@@ -112,13 +112,12 @@ def bruteforce(liste):
                 cout = (cout + liste[index_str_index_bin][1])
                 #print (cout)
                 #benef = (benef + liste_donnees_triees[index_str_index_bin][2])
-                benef = (benef + liste[index_str_index_bin][2])
+                benef = (benef + float(liste[index_str_index_bin][2]))
                     #print(cout)
                     #print (benef)
                     #print(index_str_index_bin)
 
-                if (benef_total < benef and cout <= 500):  # and cout <= 500
-
+                if (float(benef_total) < float(benef) and cout <= 500.0):  # and cout <= 500
                     benef_total = benef
                     print (benef_total)
                     cout_total = cout
@@ -135,13 +134,12 @@ def bruteforce(liste):
     print("liste des achats pour le meilleur benefice : ")
     while index_aa < long_str_index_bin:
         if (liste_action_achetees[index_aa] == '1'):
-            #print(liste_donnees_triees[index_aa][0])
             print(liste[index_aa][0])
         index_aa = index_aa + 1
 
-    print(cout_total)
-    print("benef_total")
-    print(benef_total)
+    print("cout total : " + str(cout_total) + "€")
+    #print(cout_total)
+    print("benefice total : " + str(benef_total) + "€")
     # ici, aller chercher la liste des actions, permet de ne le faire qu'une fois le résultat total obtenu
 
 
