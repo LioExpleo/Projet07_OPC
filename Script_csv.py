@@ -18,20 +18,20 @@ def trsf_csv_list(NameCsv, liste):
         index_list = 0;
         obj = csv.reader(f)
         for ligne in obj:
-            #time.sleep(0.01)
-            index_list = index_list
             liste.append(ligne)
         #supprimer la 1ere ligne de la liste qui ne peut être traitée
         liste.pop(0)
 
         long_list = len(liste)
+        print(long_list)
         index_list = 0
+
         while (index_list < (long_list)):
         #for i in (liste):
             #time.sleep(0.01)
-            print(liste[index_list][0])
-            print(liste[index_list][1])
-            print(liste[index_list][2])
+            #print(liste[index_list][0])
+            #print(liste[index_list][1])
+            #print(liste[index_list][2])
             #Dans la liste, mettre les nombre en float pour calcul futur plutôt que char
             liste[index_list][1] = float(liste[index_list][1])
             liste[index_list][2] = float(liste[index_list][2])

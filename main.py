@@ -5,12 +5,14 @@ import pandas as pandas
 import time
 
 
-fichier_csv = 'Csv/Donnees_01.csv'
+
 
 #recupération dans une liste des donnees avec suppression de la 1ere ligne pour n'avoir
 # que des donnees, et suppression des guillemets pour avoir des float
 liste_donnees_1 = []
+fichier_csv = 'Csv/Donnees_01test.csv'
 liste_donnees = trsf_csv_list(fichier_csv, liste_donnees_1)
+
 print("liste des donnees sans premiere ligne avec les nombres en float plutôt que char pour traitement")
 print(liste_donnees)
 print()
@@ -65,8 +67,9 @@ def bruteforce(liste):
     #La premiere boucle est effectuée (2 puissance nombre elements dans la liste
     # si 20 éléments dans la liste, s puissance 20 = 1 048 576 fois
     while index < length:
-        #print(index)
-        index_bin = (format(index, 'b'))
+
+
+
 
         # A chaque tour on incrémente la combinaison qui commence à 00000000000000001
         # et se termine a                                           11111111111111111
@@ -80,51 +83,50 @@ def bruteforce(liste):
         #recuperation du nombre en binaire dans une chaine de caractere afin d'aller chercher
         #chaque élement 1 ou 0
 
-        str_index_bin = str(index_bin)
+
+        #print (str_index_bin)
 
         #nombre de caractere dans la chaine, au départ moins de 20, donc pas la peine de faire 20 tours dans la boucle
         # les 20 apparaissent à partir de la fin
         #print("longueur de le liste")
         #print (long_str_index_bin)
-        #boucle qui va cherhcer les donnees si 1, et laisse si 0
+        #boucle qui va chercher les donnees si 1, et laisse si 0
         #****************************************************
         # POUR TEST DE LA SUITE, ACHAT DE TOUTES LES ACTIONS
         #str_index_bin = "00111"
-        long_str_index_bin = 3
 
         #****************************************************
+        index_bin = (format(index, 'b'))
+        str_index_bin = str(index_bin)
         long_str_index_bin = len(str_index_bin)
+        while long_str_index_bin < long_liste :
+            long_str_index_bin = len(str_index_bin)
+            str_index_bin = "0" + str_index_bin
+
         # index permettant d'aller chercher chaque caractere dans la chaine
         index_str_index_bin = 0
         cout = 0
         benef = 0.0
 
         while (index_str_index_bin < long_str_index_bin):
-            # il faudra appeler ici, le calcul du cout et des benefices
-            # print (str_index_bin[index_str_index_bin])
-            # si le bit correspondant au numero de l'action = 1, achat, sinon rien
-
             if (str_index_bin[index_str_index_bin] == '1'):
-                #print("str_index_bin[index_str_index_bin]")
-                #print(str_index_bin[index_str_index_bin])
-                #print()
-                #cout = (cout + liste_donnees_triees[index_str_index_bin][1])
                 cout = (cout + liste[index_str_index_bin][1])
-                #print (cout)
-                #benef = (benef + liste_donnees_triees[index_str_index_bin][2])
-                benef = (benef + float(liste[index_str_index_bin][2]))
-                    #print(cout)
-                    #print (benef)
-                    #print(index_str_index_bin)
-
-                if (float(benef_total) < float(benef) and cout <= 500.0):  # and cout <= 500
+                benef = (benef + (liste[index_str_index_bin][2]))
+                """
+                if index == 119943:
+                    print("index")
+                    print (index_bin)
+                    print("cout")
+                    print(cout)
+                    print("benef")
+                    print(benef)
+                    time.sleep(1)
+                    print()
+                """
+                if (float(benef_total) < float(benef) and cout <= 500):  # and cout <= 500
                     benef_total = benef
-                    print (benef_total)
                     cout_total = cout
-                    #liste_action_achetees = index
-                    #index_bin = (format(index, 'b'))
                     liste_action_achetees = (format(index, 'b'))
-
             index_str_index_bin = index_str_index_bin + 1
         index = index + 1
 
@@ -132,23 +134,19 @@ def bruteforce(liste):
     print(liste_action_achetees)
     index_aa = 0
     print("liste des achats pour le meilleur benefice : ")
+
     while index_aa < long_str_index_bin:
+        """
         if (liste_action_achetees[index_aa] == '1'):
             print(liste[index_aa][0])
+        """
         index_aa = index_aa + 1
 
+
     print("cout total : " + str(cout_total) + "€")
-    #print(cout_total)
     print("benefice total : " + str(benef_total) + "€")
-    # ici, aller chercher la liste des actions, permet de ne le faire qu'une fois le résultat total obtenu
-
-
-        #pour les 20 actions, on regarde se le bit = 0, si bit = 0, on ajoute pas le cout au cout, sinon on l'ajoute
-        #idem pour le benefice, ensuite, on range tout dans une liste avec append
-
 
 bruteforce(liste_donnees_non_triees)
-
 
 """
 def recursive(n, index):
