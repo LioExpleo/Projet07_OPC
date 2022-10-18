@@ -7,7 +7,7 @@ from fonctions_generales import complete_chaine_car, factorielle
 #recupération dans une liste des donnees avec suppression de la 1ere ligne pour n'avoir
 # que des donnees, et suppression des guillemets pour avoir des float
 liste_donnees_1 = []
-fichier_csv = 'Csv/Donnees_01test.csv'
+fichier_csv = 'Csv/Donnees_01.csv'
 liste_donnees = trsf_csv_list(fichier_csv, liste_donnees_1)
 
 print("liste des donnees sans premiere ligne avec les nombres en float plutôt que char pour traitement")

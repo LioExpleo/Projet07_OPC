@@ -4,7 +4,6 @@ def calcul_cout(liste_action, liste_select_action):
     cout_total = 0
     for i in liste_select_action:
         time.sleep(0.01)
-
         index_action = liste_select_action[index_bcl]
         cout_total = cout_total + int(liste_action[index_action][1])
         index_bcl = index_bcl + 1
