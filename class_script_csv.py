@@ -1,6 +1,14 @@
 import csv
 import time
 
+class ClassMethodesCsv:
+    # définition des attributs d'instance
+    def __init__(self, NameCsv, ListeTotale,encodage,liste):
+        self.NameCsv = NameCsv
+        self.ListeTotale = ListeTotale
+        self.encodage = encodage
+        self.liste = liste
+
 def WriteCsv(NameCsv,ListeTotale,encodage):
 # Fonction qui écrit un fichier csv à partir d'une liste, l'encodage étant à préciser
 # ouverture du fichier excel en écriture
@@ -27,12 +35,6 @@ def trsf_csv_list(NameCsv, liste):
         index_list = 0
 
         while (index_list < (long_list)):
-        #for i in (liste):
-            #time.sleep(0.01)
-            #print(liste[index_list][0])
-            #print(liste[index_list][1])
-            #print(liste[index_list][2])
-            #Dans la liste, mettre les nombre en float pour calcul futur plutôt que char
             liste[index_list][1] = float(liste[index_list][1])
             liste[index_list][2] = float(liste[index_list][2])
             index_list = index_list + 1

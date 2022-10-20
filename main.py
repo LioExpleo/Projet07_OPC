@@ -1,9 +1,12 @@
-from Script_csv import trsf_csv_list
+import class_force_brute
+from class_script_csv import trsf_csv_list
 from calcul import calcul_gain, calcul_cout
 from operator import itemgetter
+from class_force_brute import force_brute
 import pandas as pandas
 import time
-from fonctions_generales import complete_chaine_car, factorielle
+from class_fonctions_generales import complete_chaine_car, factorielle, print_liste_objet
+
 #recupération dans une liste des donnees avec suppression de la 1ere ligne pour n'avoir
 # que des donnees, et suppression des guillemets pour avoir des float
 liste_donnees_1 = []
@@ -20,28 +23,46 @@ liste_donnees_non_triees = liste_donnees
 #print("mise des actions dans l'ordre de leurs prix croissant ")
 #print(sorted(liste_donnees, key = itemgetter(1), reverse=False))
 
-print ("liste_donnees_triees pour 2ème partie de programme")
-liste_donnees_triees = sorted(liste_donnees, key = itemgetter(1), reverse=False)
-print (liste_donnees_triees)
-
 #budget pour achat des actions 500€
 budget_total = 500
 cout_action_acht = 0
 budget_restant = budget_total - cout_action_acht
 
+str_liste_actions_achetees, cout_actions_achetees,benefices=class_force_brute.force_brute(liste_donnees_non_triees,0,1,2,500)
+print("format binaire de représentation de la liste des actions achetees pour avoir le meilleur bénéfice: " + str_liste_actions_achetees)
+long_liste = len(str_liste_actions_achetees)
+
+#print liste actions
+print_liste_objet(liste_donnees,str_liste_actions_achetees,0)
+print("cout total des actions achetees : " + str("%.2f" % cout_actions_achetees) + "€")
+print("bénéfices sur les actions achetees : " + str(round(benefices,2)) + "€")
+
+
+
+
+
+
+
+print ("liste_donnees_triees pour 2ème partie de programme")
+liste_donnees_triees = sorted(liste_donnees, key = itemgetter(1), reverse=False)
 #length est la longueur recuperee de la liste (20)
 long_list = len(liste_donnees_triees)
 print(long_list)
+print (liste_donnees_triees)
+
+
+
 
 # Demande à l'utilisateur d'entrer un nombre
 n = int(input("Entrez un nombre pour calcul factorielle: "))
 print("factorielle de " + str(n) + " = " + str(factorielle(n)))
-
-def bruteforce(liste):
-    long_liste = len(liste)
+"""
+def bruteforce(liste_objet, position_liste_nom_objet, position_liste_poids_objet, position_liste_valeur_objet, poids_maxi):
+    long_liste = len(liste_objet)
     print("longueur de la liste " + str(long_liste))
     length = 2 ** long_liste
     print("longueur de la boucle " + str(length))
+    
 
     #init index de la boucle allant de 0 à length
     index = 0
@@ -74,8 +95,8 @@ def bruteforce(liste):
         # on regarde si 1 acheter, si c'est le cas, on rajoute le cout et le benefice au total
         while (index_str_index_bin < long_str_index_bin):
             if (str_index_bin[index_str_index_bin] == '1'):
-                cout = (cout + liste[index_str_index_bin][1])
-                benef = (benef + (liste[index_str_index_bin][2]))
+                cout = (cout + liste_objet[index_str_index_bin][position_liste_poids_objet])
+                benef = (benef + (liste_objet[index_str_index_bin][position_liste_valeur_objet]))
 
             # si le bénéfice calculé est supérieur au benéfice calculé précedemment, on
             # écrase l'ancienne valeur, sinon on reboucle pour recalculer le bénéfice avec la combinaison suivante
@@ -97,14 +118,14 @@ def bruteforce(liste):
     while index_aa < long_liste:
         # Dans la chaine de caractere, afficher l'action, où si indiqué actions à acheter par "1"
         if (str_liste_action_achetees[index_aa] == '1'):
-            print (liste[index_aa][0])
+            print (liste_objet[index_aa][position_liste_nom_objet])
         index_aa = index_aa + 1
 
     print("cout total : " + str("%.2f" % cout_total) + "€")
     print("benefice total : " + str(round(benef_total,2)) + "€")
 
-bruteforce(liste_donnees_non_triees)
-
+bruteforce(liste_donnees_non_triees,0,1,2,500)
+"""
 """
 def recursive(n, index):
     if n == 0:
