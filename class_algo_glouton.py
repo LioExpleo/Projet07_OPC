@@ -1,9 +1,10 @@
 
-from class_fonctions_generales import complete_chaine_car, factorielle
+from class_fonctions_generales import complete_chaine_car, calcul_rapport_cout_gain
+from operator import itemgetter
 #recupération dans une liste des donnees avec suppression de la 1ere ligne pour n'avoir
 # que des donnees, et suppression des guillemets pour avoir des float
 
-class ClassForceBrute:
+class ClassAlgoGlouton:
     # définition des attributs d'instance
     def __init__(self, liste_objet, nom_objet_position_liste, poids_objet_position_liste, valeur_objet_position_liste, poids_maxi):
         self.liste_objet = liste_objet
@@ -12,7 +13,56 @@ class ClassForceBrute:
         self.valeur_objet_position_liste = valeur_objet_position_liste
         self.poids_maxi = poids_maxi
 
-def force_brute(liste_objet, position_liste_nom_objet, position_liste_poids_objet, position_liste_valeur_objet, poids_maxi):
+def algo_glouton(liste_objet, position_liste_nom_objet, position_liste_poids_objet, position_liste_valeur_objet, poids_maxi):
+    #calcul du rapport gain/cout
+    new_list = calcul_rapport_cout_gain(liste_objet)
+    print("new list prog glouton")
+    print(new_list)
+
+    print("tri en ordre rapport benef/cout decroissant, le meilleur rapport en haut de liste")
+    liste_triee_benef_cout = (sorted(new_list, key=itemgetter(3), reverse=True))
+    print (liste_triee_benef_cout)
+    #mise en ordre décroissant selon le rapport gain/cout
+    #print(sorted(new_list, key = itemgetter(1), reverse=False))
+
+    #algo glouton
+    poids = 0
+    long_list = len(liste_triee_benef_cout)
+    i = 0
+    selection_binaire =""
+    while i < long_list:
+        poids += liste_triee_benef_cout[i][1]
+        if poids < poids_maxi:
+            selection_binaire = selection_binaire + "1"
+        else:
+            selection_binaire = selection_binaire + "0"
+        i = i + 1
+    print(selection_binaire)
+    long_selection_binaire = len(selection_binaire)
+
+    cout = 0
+    benef = 0.0
+
+    list_action =[]
+    long_list = len (liste_triee_benef_cout)
+    index = 0
+    #for j in liste_triee_benef_cout:
+    for i in liste_triee_benef_cout :
+        if selection_binaire[index] == "1":
+            list_action.append(liste_triee_benef_cout[index][0])
+            cout = cout + liste_triee_benef_cout[index][1]
+            benef = benef + liste_triee_benef_cout[index][2]
+        index = index + 1
+
+    print (list_action)
+    print (cout)
+    print(benef)
+
+
+
+
+    """
+
     long_liste = len(liste_objet)
     print("longueur de la liste des objets " + str(long_liste))
     length = 2 ** long_liste
@@ -36,19 +86,21 @@ def force_brute(liste_objet, position_liste_nom_objet, position_liste_poids_obje
 
         #on remplace les caractere manquants par des 0 dans la chaine de caractere si le nombre binaire
         #dans la chaine de caractere est inferieur a la longueur de la liste
-        str_index_bin = complete_chaine_car(str_index_bin, long_liste, "0")
-
+        #optimis : suppression des caracteres en plus de str_index_bin, et modification de la valeur de l'index au
+        #depart pour aller chercher les bonnes valeurs
+        #str_index_bin = complete_chaine_car(str_index_bin, long_liste, "0")
         #recuperation de la longueur de la liste de la chaine de caractere = long de la liste
         long_str_index_bin = len(str_index_bin)
 
         # index permettant d'aller chercher chaque caractere dans la chaine qui s'incrémente
-        index_str_index_bin = 0
+        #index_str_index_bin = 0
+        index_str_index_bin = long_liste - long_str_index_bin + 1
 
         cout = 0
         benef = 0.0
         #Pour toutes les actions (20 dans notre cas),
         # on regarde si 1 acheter, si c'est le cas, on rajoute le cout et le benefice au total
-        while (index_str_index_bin < long_str_index_bin):
+        while (index_str_index_bin < long_str_index_bin and cout <= poids_maxi):
             if (str_index_bin[index_str_index_bin] == '1'):
                 cout = (cout + liste_objet[index_str_index_bin][position_liste_poids_objet])
                 benef = (benef + (liste_objet[index_str_index_bin][position_liste_valeur_objet]))
@@ -58,6 +110,8 @@ def force_brute(liste_objet, position_liste_nom_objet, position_liste_poids_obje
             if valeure_totale < benef and cout <= poids_maxi:  # and cout <= 500
                 valeure_totale = benef
                 cout_total = cout
+                #on complete la chaine str_index_bin si necessaire
+                str_index_bin = complete_chaine_car(str_index_bin, long_liste, "0")
                 liste_objets_select = str_index_bin
                 #print(liste_objets_select)
             index_str_index_bin = index_str_index_bin + 1
@@ -66,3 +120,4 @@ def force_brute(liste_objet, position_liste_nom_objet, position_liste_poids_obje
     #liste des objets à sélectionner ou pas pour obtenir le meilleur benefice
     str_liste_objets_select = str(liste_objets_select)
     return str_liste_objets_select, cout_total, valeure_totale
+    """

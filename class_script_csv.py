@@ -31,7 +31,6 @@ def trsf_csv_list(NameCsv, liste):
         liste.pop(0)
 
         long_list = len(liste)
-        print(long_list)
         index_list = 0
 
         while (index_list < (long_list)):

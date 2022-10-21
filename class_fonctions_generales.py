@@ -14,6 +14,23 @@ def complete_chaine_car(chaine_char,long_a_atteindre, char_complete_chaine):
         long_liste = len(chaine_char)
     return chaine_char
 
+def calcul_rapport_cout_gain(liste):
+    #Ajoute à la liste le rapport gain/cout
+    index = 0
+    new_list = []
+    for i in liste:
+        list_temp = []
+        cout = float(liste[index][1])
+        benef = float(liste[index][2])
+        rapport_gain_cout = benef/cout
+        list_temp.append(liste[index][0])
+        list_temp.append(liste[index][1])
+        list_temp.append(liste[index][2])
+        list_temp.append(rapport_gain_cout)
+        index = index + 1
+        new_list.append(list_temp)
+    return new_list
+
 def factorielle(n):
     """Ceci est une fonction récursive qui appelle
    lui-même pour trouver la factorielle du nombre donné"""
