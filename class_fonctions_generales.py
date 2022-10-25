@@ -47,3 +47,17 @@ def print_liste_objet(liste, str_liste_select_1_0, position_liste_nom_objet):
         if (str_liste_select_1_0[index_aa] == '1'):
             print(liste[index_aa][position_liste_nom_objet])
         index_aa = index_aa + 1
+
+def sup_fin_liste(liste, garde):
+    long_liste = len(liste)
+    print(long_liste)
+    if garde > long_liste :
+        print ("On ne peut garder plus d'éléments que la liste n'en contient")
+    else:
+        nbre_element_fac = long_liste - garde
+        index = int(long_liste) - 1
+    while nbre_element_fac > 0 :
+        liste.pop(index)
+        nbre_element_fac = nbre_element_fac - 1
+        index = index - 1
+    return liste

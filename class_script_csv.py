@@ -39,3 +39,64 @@ def trsf_csv_list(NameCsv, liste):
             index_list = index_list + 1
     return liste
 
+def trsf_csv_list_pds_int(NameCsv, liste):
+    # Ouvrir le fichier csv
+    with open(NameCsv, 'r') as f:
+        # Créer un objet csv à partir du fichier
+        index_list = 0;
+        obj = csv.reader(f)
+        for ligne in obj:
+            liste.append(ligne)
+
+        #supprimer la 1ere ligne de la liste qui ne peut être traitée
+        liste.pop(0)
+
+        long_list = len(liste)
+        index_list = 0
+
+        #print(liste)
+        while (index_list < (long_list)):
+            liste[index_list][1] = int(liste[index_list][1])
+            liste[index_list][2] = float(liste[index_list][2])
+            index_list = index_list + 1
+        #print(liste)
+    return liste
+
+def trsf_csv_list_pds_int_p3(NameCsv, liste):
+    # Ouvrir le fichier csv
+    with open(NameCsv, 'r') as f:
+        # Créer un objet csv à partir du fichier
+        index_list = 0;
+        obj = csv.reader(f)
+        for ligne in obj:
+            liste.append(ligne)
+
+        #supprimer la 1ere ligne de la liste qui ne peut être traitée
+        liste.pop(0)
+
+        long_list = len(liste)
+        index_list_origine = 0
+        index_list_destination = 0
+        #print(liste)
+        while (index_list_origine < (long_list)):
+            cout = liste[index_list_origine][1]
+            if float(cout) > 0.0 :
+                #print(cout)
+                cout_cts = float(cout) * 100.0
+                #print(cout_cts)
+                liste[index_list_destination][1] = int(cout_cts)
+                #liste[index_list][1] = int(liste[index_list][1])
+                liste[index_list_destination][2] = float(liste[index_list_origine][2])
+                index_list_origine = index_list_origine + 1
+                index_list_destination = index_list_destination + 1
+            else:   # on supprime de la liste la donnee, et on n'incrémente pas l'index, car lors du prochain tour,
+                    # on récupérera le prochain élément de la liste sans augmenter l'index
+
+                    # on décrémente la longueur de la liste, car la longueur de la liste sera inférieure de 1 à chaque
+                    # passage ici
+                liste.pop(index_list_origine)
+                long_list = long_list -1
+
+            #index_list_origine = index_list_origine + 1
+        #print(liste)
+    return liste
