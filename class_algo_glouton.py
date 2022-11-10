@@ -3,7 +3,7 @@ from class_fonctions_generales import complete_chaine_car, calcul_rapport_cout_g
 from operator import itemgetter
 #recupération dans une liste des donnees avec suppression de la 1ere ligne pour n'avoir
 # que des donnees, et suppression des guillemets pour avoir des float
-
+'''
 class ClassAlgoGlouton:
     # définition des attributs d'instance
     def __init__(self, liste_objet, nom_objet_position_liste, poids_objet_position_liste, valeur_objet_position_liste, poids_maxi):
@@ -121,3 +121,4 @@ def algo_glouton(liste_objet, position_liste_nom_objet, position_liste_poids_obj
     str_liste_objets_select = str(liste_objets_select)
     return str_liste_objets_select, cout_total, valeure_totale
     """
+    '''

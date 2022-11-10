@@ -21,43 +21,39 @@ def WriteCsv(NameCsv,ListeTotale,encodage):
 
 def trsf_csv_list(NameCsv, liste):
     # Ouvrir le fichier csv
-    with open(NameCsv, 'r') as f:
+    with open(NameCsv, 'r') as f: #ouverture du fichier csv en lecture
         # Créer un objet csv à partir du fichier
-        index_list = 0;
         obj = csv.reader(f)
         for ligne in obj:
-            liste.append(ligne)
-        #supprimer la 1ere ligne de la liste qui ne peut être traitée
+            liste.append(ligne)  #On ajoute toutes les lignes dans une liste
+        #et on supprime l'entête afin de ne traiter que les valeurs
         liste.pop(0)
 
         long_list = len(liste)
         index_list = 0
-
-        while (index_list < (long_list)):
+        while (index_list < (long_list)): #on met le coût et le gain en flottant pour le traitement
             liste[index_list][1] = float(liste[index_list][1])
             liste[index_list][2] = float(liste[index_list][2])
             index_list = index_list + 1
     return liste
 
-def trsf_csv_list_pds_int(NameCsv, liste):
-    # Ouvrir le fichier csv
-    with open(NameCsv, 'r') as f:
+def trsf_csv_list_pds_int(NameCsv, liste): #
+    with open(NameCsv, 'r') as f: #ouverture du fichier csv en lecture
         # Créer un objet csv à partir du fichier
         index_list = 0;
         obj = csv.reader(f)
         for ligne in obj:
-            liste.append(ligne)
+            liste.append(ligne) #On ajoute toutes les lignes dans une liste
 
-        #supprimer la 1ere ligne de la liste qui ne peut être traitée
+        #et on supprime l'entête afin de ne traiter que les valeurs
         liste.pop(0)
 
         long_list = len(liste)
         index_list = 0
-
         #print(liste)
         while (index_list < (long_list)):
-            liste[index_list][1] = int(liste[index_list][1])
-            liste[index_list][2] = float(liste[index_list][2])
+            liste[index_list][1] = int(liste[index_list][1]) # On met le coût en entier trait cts sac a dos dynamique
+            liste[index_list][2] = float(liste[index_list][2]) #On met le gain en flottant
             index_list = index_list + 1
         #print(liste)
     return liste

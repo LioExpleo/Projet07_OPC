@@ -16,8 +16,8 @@ def optimis_force_brute(liste_objet, position_liste_nom_objet, position_liste_po
     long_liste = len(liste_objet)
     print("longueur de la liste des objets " + str(long_liste))
     length = 2 ** long_liste
-    print("longueur de la boucle : 2 ** longueur de la liste " + str(length))
-    print()
+    #print("longueur de la boucle : 2 ** longueur de la liste " + str(length))
+    #print()
 
     #initialisation des données
     index = 0

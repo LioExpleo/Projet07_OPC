@@ -11,90 +11,19 @@ from operator import itemgetter
 #import pandas as pandas
 import time
 from class_fonctions_generales import complete_chaine_car, factorielle, print_liste_objet, calcul_rapport_cout_gain
-#from class_algo_glouton import algo_glouton
-#from class_algo_new1 import algo_new1
-#from class_algo_new2 import sacADos_dynamique
 #recupération dans une liste des donnees avec suppression de la 1ere ligne pour n'avoir
 # que des donnees, et suppression des guillemets pour avoir des float
 liste_donnees_1 = []
 fichier_csv = 'Csv/Donnees_01.csv'
 liste_donnees = trsf_csv_list(fichier_csv, liste_donnees_1)
 
-print("liste des donnees sans premiere ligne avec les nombres en float plutôt que char pour traitement")
-print(liste_donnees)
+#print("liste des donnees sans premiere ligne avec les nombres en float plutôt que char pour traitement")
+#print(liste_donnees)
 print()
 liste_donnees_non_triees = liste_donnees #
 
-#pour que lors des tests, on sorte de la boucle si le budget restant est inférieur
-# au prix de la prochaine action, on met les actions dans l'ordre de prix croissant
-
-#print("mise des actions dans l'ordre de leurs prix croissant ")
-#print(sorted(liste_donnees, key = itemgetter(1), reverse=False))
-
-#budget pour achat des actions 500€
-budget_total = 500
-cout_action_acht = 0
-budget_restant = budget_total - cout_action_acht
-debut_time_algo = time.time()
-str_liste_actions_achetees, cout_actions_achetees,benefices=class_force_brute.force_brute(liste_donnees_non_triees,0,1,2,500)
-fin_time_algo = time.time()
-temps_algo = fin_time_algo - debut_time_algo
-
-print("********************************************FORCE BRUTE********************************************")
-print(str(temps_algo) + " secondes pour l'algorithme force brute")
-print("format binaire de représentation de la liste des actions achetees pour avoir le meilleur bénéfice avec force brute: " + str_liste_actions_achetees)
-long_liste = len(str_liste_actions_achetees)
-
-#print liste actions
-print_liste_objet(liste_donnees,str_liste_actions_achetees,0)
-print("cout total des actions achetees : " + str("%.2f" % cout_actions_achetees) + "€")
-print("bénéfices sur les actions achetees : " + str(round(benefices,2)) + "€")
-print()
-print()
-
-print("********************************************OPTIMISATION********************************************")
-print ("liste_donnees_triees pour 2ème partie de programme")
-liste_donnees_triees = sorted(liste_donnees, key = itemgetter(1), reverse=False)
-#length est la longueur recuperee de la liste (20)
-long_list = len(liste_donnees_triees)
-print(long_list)
-print (liste_donnees_triees)
-
-debut_time_algo = time.time()
-str_liste_actions_achetees, cout_actions_achetees,benefices = class_optimisation_force_brutee.optimis_force_brute(liste_donnees_triees,0,1,2,500)
-fin_time_algo = time.time()
-temps_algo = fin_time_algo - debut_time_algo
-#print liste actions
-print(str(temps_algo) + " secondes pour l'algorithme optimisation force brute")
-
-print_liste_objet(liste_donnees_triees,str_liste_actions_achetees,0)
-print("cout total des actions achetees : " + str("%.2f" % cout_actions_achetees) + "€")
-print("bénéfices sur les actions achetees : " + str(round(benefices,2)) + "€")
-print()
-print()
-
-
-print("********************************************OPTIMISATION********************************************")
-#Algo optimisé V2 Rappport_benef_masse = benefice/masse
-#new_list = calcul_rapport_cout_gain(liste_donnees_non_triees)
-#print(new_list)
-debut_time_algo = time.time()
-class_algo_glouton.algo_glouton(liste_donnees_non_triees,0,1,2,500)
-fin_time_algo = time.time()
-temps_algo = fin_time_algo - debut_time_algo
-print(str(temps_algo) + " secondes pour l'algorithme GLOUTON")
-print()
-print()
-"""
-debut_time_algo = time.time()
-class_algo_new1.algo_new1(liste_donnees_non_triees,0,1,2,500)
-fin_time_algo = time.time()
-temps_algo = fin_time_algo - debut_time_algo
-print(str(temps_algo) + " secondes pour l'algorithme algo_new1 ")
-print()
-print()
-"""
 print("***************************** ALGO SAS A DOS DYNAMIQUE FICHIER DE 20 ACTIONS *****************************")
+print("Le prix des actions étant en € sans décimale, Big-O = nbre objet * capacité = 20 * 500 = 10 000")
 debut_time_algo = time.time()
 liste_donnees_2 =[]
 fichier_csv = 'Csv/Donnees_01.csv'
@@ -103,7 +32,7 @@ liste_donnees = trsf_csv_list_pds_int(fichier_csv, liste_donnees_2)
 # avec un nouvel élément,
 #on maximalise avec le poids restant en récupérant la maximalisation précédente correspondant au poids restant,
 #Principe de
-benefice, liste_actions = class_algo_new2.sacADos_dynamique(500, liste_donnees )
+benefice, liste_actions = class_sac_a_dos_dyn.sacADos_dynamique(500, liste_donnees )
 print()
 fin_time_algo = time.time()
 temps_algo = fin_time_algo - debut_time_algo
@@ -124,8 +53,10 @@ for i in liste_actions:
 print("pour un coût de  : " + str(cout) + "€" + " et un benefice de " + str(benefice) + "€")
 print()
 
-
+print()
 print("***************************** ALGO SAS A DOS DYNAMIQUE 1er FICHIER SIENNA *****************************")
+
+
 #*calcul bénéfices données 1 partie 3 du projet******************************************
 debut_time_algo = time.time()
 liste_donnees_2 =[]
@@ -133,7 +64,8 @@ liste_donnees_2 =[]
 fichier_csv = 'Csv/P3_Donnees01.csv'
 
 liste_donnees = trsf_csv_list_pds_int_p3(fichier_csv, liste_donnees_2)
-#print(liste_donnees)
+print("nombre de donnees après avoir supprimé les erreurs : " + str (len(liste_donnees)))
+print("Le prix des actions étant en € avec décimales, Big-O = nbre objet * capacité * 100 = 957 * (500 * 100) = 47 850 000")
 
 ##Remplacement du poucentage de gain par le gain en centimes d'euros dans la liste
 index = 0
@@ -145,12 +77,12 @@ for i in liste_donnees:
 #on maximalise avec le poids restant en récupérant la maximalisation précédente correspondant au poids restant,
 #Principe de
 
-benefice, liste_actions = class_algo_new2.sacADos_dynamique(50000, liste_donnees )
+benefice, liste_actions = class_sac_a_dos_dyn.sacADos_dynamique(50000, liste_donnees )
 print()
 
 fin_time_algo = time.time()
 temps_algo = fin_time_algo - debut_time_algo
-print(str(temps_algo) + " secondes pour l'algorithme algo_new2 ")
+print(str(temps_algo) + " secondes pour l'algorithme algorithme optimisé avec le 1er fichier SIENNA ")
 
 print("listes des actions pour le meilleur bénéfice avec un algorithme optimisé")
 index = 0
@@ -168,14 +100,15 @@ for i in liste_actions:
 cout = cout / 100
 print("pour un coût de  : " + str(cout) + "€" + " et un benefice de " + str(round(benefice, 2)) + "€")
 print()
-
+print()
 print("***************************** ALGO SAS A DOS DYNAMIQUE 2ème FICHIER SIENNA *****************************")
 #*calcul bénéfices données 2 partie 3 du projet*****************************************************
 debut_time_algo = time.time()
 liste_donnees_2 =[]
 fichier_csv = 'Csv/P3_Donnees02.csv'
 liste_donnees = trsf_csv_list_pds_int_p3(fichier_csv, liste_donnees_2)
-#print(liste_donnees)
+print("nombre de donnees après avoir supprimé les erreurs : " + str (len(liste_donnees)))
+print("Le prix des actions étant en € avec décimales, Big-O = nbre objet * capacité * 100 = 541 * (500 * 100) = 27 050 000")
 
 ##Remplacement du poucentage de gain par le gain en centimes d'euros dans la liste
 index = 0
@@ -187,12 +120,12 @@ for i in liste_donnees:
 #on maximalise avec le poids restant en récupérant la maximalisation précédente correspondant au poids restant,
 #Principe de
 
-benefice, liste_actions = class_algo_new2.sacADos_dynamique(50000, liste_donnees )
+benefice, liste_actions = class_sac_a_dos_dyn.sacADos_dynamique(50000, liste_donnees )
 print()
 
 fin_time_algo = time.time()
 temps_algo = fin_time_algo - debut_time_algo
-print(str(temps_algo) + " secondes pour l'algorithme algo_new2 ")
+print(str(temps_algo) + " secondes pour l'algorithme algorithme optimisé avec le 2eme fichier SIENNA ")
 
 print("listes des actions pour le meilleur bénéfice avec un algorithme optimisé")
 index = 0
