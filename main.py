@@ -8,7 +8,7 @@ from calcul import calcul_gain, calcul_cout
 from operator import itemgetter
 from class_force_brute import force_brute
 from class_optimisation_force_brutee import optimis_force_brute
-import pandas as pandas
+#import pandas as pandas
 import time
 from class_fonctions_generales import complete_chaine_car, factorielle, print_liste_objet, calcul_rapport_cout_gain
 from class_algo_glouton import algo_glouton
@@ -17,13 +17,13 @@ from class_algo_new2 import sacADos_dynamique
 #recupération dans une liste des donnees avec suppression de la 1ere ligne pour n'avoir
 # que des donnees, et suppression des guillemets pour avoir des float
 liste_donnees_1 = []
-fichier_csv = 'Csv/Donnees_01n.csv'
+fichier_csv = 'Csv/Donnees_01.csv'
 liste_donnees = trsf_csv_list(fichier_csv, liste_donnees_1)
 
 print("liste des donnees sans premiere ligne avec les nombres en float plutôt que char pour traitement")
 print(liste_donnees)
 print()
-liste_donnees_non_triees = liste_donnees
+liste_donnees_non_triees = liste_donnees #
 
 #pour que lors des tests, on sorte de la boucle si le budget restant est inférieur
 # au prix de la prochaine action, on met les actions dans l'ordre de prix croissant
